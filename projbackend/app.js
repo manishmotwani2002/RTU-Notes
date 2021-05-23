@@ -4,11 +4,14 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
-//routes
-const authRoutes = require('./routes/authentication.js');
-const newsRoutes = require('./routes/news');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
-//MongoDb Connection
+//My Routes
+const authRoutes = require('./routes/auth');
+const postRoutes = require('./routes/post');
+
 mongoose
 	.connect(process.env.DATABASE, {
 		useNewUrlParser: true,
@@ -19,13 +22,19 @@ mongoose
 		console.log('DB CONNECTED');
 	});
 
-app.use('/api', authRoutes);
-app.use('/api', newsRoutes);
-
 const port = process.env.PORT || 8000;
 
+//Here app.use is a middleware
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(cors());
+
+//My routes
+app.use(authRoutes);
+app.use(postRoutes);
+
 app.get('/', (req, res) => {
-	res.send('hellos...');
+	res.send('home route');
 });
 
 //starting the server

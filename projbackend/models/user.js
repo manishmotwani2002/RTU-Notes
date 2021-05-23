@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
-const crypto = require('crypto'); //required for generation of encrypted password
-const uuidv1 = require('uuid/v1'); //required for salt generation
+const crypto = require('crypto');
+const uuidv1 = require('uuid/v1');
+
+const { ObjectId } = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
 	{
@@ -26,24 +28,33 @@ const userSchema = new mongoose.Schema(
 			required: true,
 		},
 		salt: String,
+		role: {
+			type: Number,
+			default: 0,
+		},
+		posts: {
+			type: ObjectId,
+			ref: 'Post',
+		},
 	},
 	{ timestamps: true }
 );
-//records the time of the creation of entry in this schema
 
+//virtual
 userSchema
-	.virtual('password') //to generate virtual method in userSchema
+	.virtual('password')
 	.set(function (password) {
-		this._password = password; //copying *password* given by user in local variable
-		this.salt = uuidv1(); //generates a unique salt on every call(so if password of 2 user is same then salt is different)
-		this.encry_password = this.securePassword(password); //generates encry_password by using the securePassword method(generate encrypted password)
+		this._password = password;
+		this.salt = uuidv1();
+		this.encry_password = this.securePassword(password);
 	})
 	.get(function () {
 		return this._password;
-	}); //defining of get and set function
+	});
 
+//method
 userSchema.methods = {
-	authenticate: function (plainpassword) {
+	autheticate: function (plainpassword) {
 		return this.securePassword(plainpassword) === this.encry_password;
 	},
 
@@ -60,5 +71,4 @@ userSchema.methods = {
 	},
 };
 
-//to export the userSchema by making model
 module.exports = mongoose.model('User', userSchema);

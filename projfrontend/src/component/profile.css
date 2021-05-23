@@ -1,0 +1,24 @@
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  background-color: #43d1af;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button {
+  box-sizing: border-box;
+
+  width: 100%;
+  padding: 3%;
+  background: #43d1af;
+  border-bottom: 2px solid #30c29e;
+  border-top-style: none;
+  border-right-style: none;
+  border-left-style: none;
+  color: #fff;
+}
+
+button:hover {
+  background: #2ebc99;
+}
