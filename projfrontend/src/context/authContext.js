@@ -4,8 +4,10 @@ import createDataContext from './createDataContext';
 
 const authReducer = (state, action) => {
 	switch (action.type) {
-		case 'error_handling':
-			return { ...state, errorMessage: action.payload };
+		case 'error_handling_signup':
+			return { ...state, errorMessageSignup: action.payload };
+		case 'error_handling_signin':
+			return { ...state, errorMessageSignin: action.payload };
 		case 'signup':
 			return {
 				...state,
@@ -57,7 +59,7 @@ const signup = (dispatch) => {
 			.catch(function (error) {
 				console.log(error.response);
 				dispatch({
-					type: 'error_handling',
+					type: 'error_handling_signup',
 					payload: error.response.data.error,
 				});
 			});
@@ -83,7 +85,7 @@ const signin = (dispatch) => {
 			.catch(function (error) {
 				console.log(error.response);
 				dispatch({
-					type: 'error_handling',
+					type: 'error_handling_signin',
 					payload: error.response.data.error,
 				});
 			});
@@ -112,5 +114,10 @@ const isAuthenticated = () => {
 export const { Context, Provider } = createDataContext(
 	authReducer,
 	{ signup, signin, signout, isAuthenticated },
-	{ token: null, errorMessage: '', didRedirect: false }
+	{
+		token: null,
+		errorMessageSignup: '',
+		errorMessageSignin: '',
+		didRedirect: false,
+	}
 );

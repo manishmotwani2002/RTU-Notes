@@ -1,31 +1,30 @@
 const Post = require('../models/post');
 var ObjectId = require('mongoose').Types.ObjectId;
 
-exports.createPost = (req, res) => {
-	const { title, content, branch, semester, subject } = req.body;
+exports.createPost = async (req, res) => {
+	const { title, description, branch, semester, content, subject } = req.body;
+	console.log('manish');
+	// console.log(req);
 
-	// const { user } = req.profile;
-
-	// console.log(req.profile);
+	console.log(title, description, branch, semester, content, subject);
 
 	const details = req.body;
 	details.user = req.profile._id;
 	console.log('req.profile', req.profile);
 	details.userName = req.profile.name;
 
-	console.log(title, content, branch, semester, subject);
-	if (!title || !content || !branch || !semester || !subject) {
+	if (!title || !branch || !semester || !subject || !content) {
 		return res.status(422).json({
 			error: 'Please enter all the required fields',
 		});
 	}
-	console.log(details);
 
 	const post = new Post(details);
 
 	console.log('POST', post);
 	post.save((err, post) => {
 		if (err) {
+			console.log('err', err);
 			return res.status(422).json({
 				err: 'not able to save post in DB',
 			});
@@ -34,6 +33,7 @@ exports.createPost = (req, res) => {
 			post,
 		});
 	});
+	// });
 };
 
 exports.getPostById = (req, res, next, id) => {
@@ -127,4 +127,22 @@ exports.getUserForPost = (req, res) => {
 	req.profile.updatedAt = undefined;
 
 	return res.json(req.profile);
+};
+
+exports.searchPost = (req, res) => {
+	const keyword = req.params.keyword;
+	console.log(keyword);
+
+	var regex = new RegExp(keyword, 'i');
+
+	Post.find({ $or: [{ description: regex }, { title: regex }] })
+		.then((response) => {
+			console.log('response', response);
+			res.send(response);
+		})
+		.catch((error) => {
+			//error handling
+			console.log('error', error);
+			res.send(error);
+		});
 };

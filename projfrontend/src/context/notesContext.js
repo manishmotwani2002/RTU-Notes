@@ -1,4 +1,6 @@
+import axios from 'axios';
 import api from '../api/notes-api';
+import { API } from '../backend';
 import createDataContext from './createDataContext';
 
 const notesReducer = (state, action) => {
@@ -9,6 +11,8 @@ const notesReducer = (state, action) => {
 			return { ...state, profileArray: action.payload };
 		case 'admin':
 			return { ...state, adminArray: action.payload };
+		case 'search':
+			return { ...state, searchArray: action.payload };
 		default:
 			return state;
 	}
@@ -24,21 +28,58 @@ const createNotes = (dispatch) => {
 		subject,
 		userId,
 	}) => {
-		var sem = parseInt(semester);
-		console.log(title, description, content, sem, branch, subject, userId);
-		const response = await api
-			.post(`/post/create/${userId}`, {
-				title: title,
-				description: description,
-				content: content,
-				semester: sem,
-				branch: branch,
-				subject: subject,
+		console.log('manish');
+
+		// console.log('check');
+		console.log(title, description, content, semester, branch, subject, userId);
+		const token = localStorage.getItem('token');
+
+		// fetch(`${API}/post/create/${userId}`, {
+		// 	method: 'POST',
+		// headers: {
+		// 	Accept: 'application/json',
+		// 	Authorization: `Bearer ${token}`,
+		// 	'Content-Type': 'application/json',
+		// },
+		// body: {
+		// 	title: title,
+		// 	description: description,
+		// semester: semester,
+		// 		subject: subject,
+		// 		branch: branch,
+		// 		content: content,
+		// 	},
+		// })
+		// 	.then((response) => {
+		// 		console.log('response', response);
+		// 		console.log('check');
+		// 	alert('Your post is uploaded successfully');
+		// 	// window.location.reload();
+		// 	return response.json();
+		// })
+		// .catch((err) => {
+		// 	console.log(err);
+		// 	console.log('check');
+		// });
+
+		await api
+			.post(`${API}/post/create/${userId}`, {
+				title,
+				description,
+				semester,
+				subject,
+				branch,
+				content,
 			})
-			.catch((err) => {
+			.then(function (response) {
+				console.log(response);
+				console.log('check');
+				alert('Your post is uploaded successfully');
+				window.location.reload();
+			})
+			.catch(function (err) {
 				console.log(err);
 			});
-		console.log(response);
 	};
 };
 
@@ -104,8 +145,52 @@ const removeNotes = (dispatch) => {
 	};
 };
 
+const searchNotes = (dispatch) => {
+	return async ({ searchedValue }) => {
+		console.log(searchedValue);
+		await api
+			.get(`/searchtest/${searchedValue}`)
+			.then((response) => {
+				dispatch({ type: 'search', payload: response.data });
+				console.log(response.data);
+			})
+			.catch((err) => console.log(err));
+	};
+};
+
+const submitComment = (dispatch) => {
+	return async ({ comment }) => {
+		console.log('comment', comment);
+
+		api
+			.post('/comment', { content: comment })
+			.then((response) => {
+				console.log('res', response);
+				alert('comment saved successfully!!');
+				window.location.reload();
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	};
+};
+
 export const { Context, Provider } = createDataContext(
 	notesReducer,
-	{ createNotes, filterNotes, getUserNotes, removeNotes, AllNotes },
-	{ errorMessage: '', postArray: [], profileArray: [], adminArray: [] }
+	{
+		searchNotes,
+		createNotes,
+		filterNotes,
+		getUserNotes,
+		removeNotes,
+		AllNotes,
+		submitComment,
+	},
+	{
+		errorMessage: '',
+		postArray: [],
+		profileArray: [],
+		adminArray: [],
+		searchArray: [],
+	}
 );

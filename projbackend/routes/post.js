@@ -10,6 +10,7 @@ const {
 	filterPosts,
 	getAllPosts,
 	getUserPosts,
+	searchPost,
 } = require('../controllers/post');
 
 router.param('userId', getUserById);
@@ -37,5 +38,7 @@ router.post('/posts/filter', filterPosts);
 router.get('/posts/all/:userId', isAuthenticated, isAdmin, getAllPosts);
 
 router.get('/posts/user/:userId', isAuthenticated, getUserPosts);
+
+router.get('/searchtest/:keyword', searchPost);
 
 module.exports = router;

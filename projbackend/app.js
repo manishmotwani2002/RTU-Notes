@@ -11,6 +11,7 @@ const cors = require('cors');
 //My Routes
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
+const commentRoutes = require('./routes/comment');
 
 mongoose
 	.connect(process.env.DATABASE, {
@@ -32,6 +33,9 @@ app.use(cors());
 //My routes
 app.use(authRoutes);
 app.use(postRoutes);
+app.use(commentRoutes);
+
+// app.use('/uploads', express.static('uploads'));
 
 app.get('/', (req, res) => {
 	res.send('home route');

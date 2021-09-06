@@ -4,9 +4,9 @@ import MainNavigation from './MainNavigation';
 
 const Layout = (props) => {
 	return (
-		<Fragment>
+		<Fragment className="">
 			<MainNavigation />
-			<main className={classes.main}>{props.children}</main>
+			<main className="bg-gray-50">{props.children}</main>
 		</Fragment>
 	);
 };

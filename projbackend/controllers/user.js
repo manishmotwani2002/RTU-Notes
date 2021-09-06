@@ -1,5 +1,6 @@
 //it is the command to require the user schema so that operation can be performed
 const User = require('../models/user');
+const Post = require('../models/post');
 
 //methods
 
@@ -46,3 +47,4 @@ exports.updateUser = (req, res) => {
 		}
 	);
 };
+//user ends..
