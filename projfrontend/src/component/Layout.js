@@ -1,4 +1,3 @@
-import classes from './Layout.module.css';
 import { Fragment } from 'react';
 import MainNavigation from './MainNavigation';
 

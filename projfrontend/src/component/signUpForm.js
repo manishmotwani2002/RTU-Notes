@@ -100,55 +100,5 @@ export default function SignUpForm() {
 				</div>
 			</div>
 		</div>
-
-		// <div className="form-style-6">
-		// 	<h1>Sign Up Form</h1>
-
-		// 	<input
-		// 		type="text"
-		// 		placeholder="First Name"
-		// 		onChange={(event) => {
-		// 			setName(event.target.value);
-		// 		}}
-		// 	/>
-
-		// 	<input
-		// 		type="text"
-		// 		placeholder="Last Name(optional)"
-		// 		onChange={(event) => {
-		// 			setLastname(event.target.value);
-		// 		}}
-		// 	/>
-
-		// 	<input
-		// 		type="text"
-		// 		placeholder="Email"
-		// 		onChange={(event) => {
-		// 			setEmail(event.target.value);
-		// 		}}
-		// 	/>
-
-		// 	<input
-		// 		type="text"
-		// 		placeholder="Password"
-		// 		onChange={(event) => {
-		// 			setPassword(event.target.value);
-		// 		}}
-		// 	/>
-		// 	<button
-		// 		onClick={() =>
-		// 			signup({
-		// 				name: name,
-		// 				lastname: lastname,
-		// 				email: email,
-		// 				password: password,
-		// 			})
-		// 		}>
-		// 		submit
-		// 	</button>
-		// 	<div className="text-danger font-bold error ">
-		// 		{state.errorMessageSignup ? <div>{state.errorMessageSignup}</div> : null}
-		// 	</div>
-		// </div>
 	);
 }

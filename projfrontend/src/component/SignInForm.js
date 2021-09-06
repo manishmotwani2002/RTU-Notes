@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Context as authContext } from '../context/authContext';
-// import './signUpForm.css';
 import { isAuthenticated } from '../middlewares/authMiddleware';
 
 const SignInForm = () => {
@@ -13,9 +12,6 @@ const SignInForm = () => {
 	if (isAuthenticated()) {
 		return <Redirect to="/" />;
 	}
-	//   if (state.didRedirect) {
-	//     return <Redirect to="/" />;
-	//   }
 
 	const handleSubmit = (event) => {
 		event.preventDefault();

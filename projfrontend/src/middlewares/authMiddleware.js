@@ -1,5 +1,4 @@
 import { Redirect } from 'react-router';
-import { API } from '../backend';
 export const isAuthenticated = () => {
 	if (typeof window == 'undefined') {
 		return false;

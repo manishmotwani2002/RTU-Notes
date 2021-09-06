@@ -1,15 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { browserHistory } from 'react-router';
 import { Context as notesContext } from '../../context/notesContext';
-// import './Home';
 import Card from '../../component/Card';
 import SearchBar from '../../component/SearchBar';
 import CommentBox from '../../component/CommentBox';
 import Footer from '../../component/Footer';
-import { isAuthenticated } from '../../middlewares/authMiddleware';
 import { Redirect, Link, NavLink } from 'react-router-dom';
-import bookimg from './bookimg.png';
-import bannerimg from './bannerimg.jpg';
 
 const Home = () => {
 	const { filterNotes, state } = useContext(notesContext);

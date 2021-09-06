@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Context as authContext } from '../context/notesContext';
-// import './SearchBar.css';
 
 const SearchBar = () => {
 	const [searchedValue, setSearchedValue] = useState('');

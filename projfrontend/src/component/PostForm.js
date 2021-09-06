@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import './signUpForm.css';
 import Progress from 'react-progressbar';
 import firebase from '../firebase';
 import { Context as NotesContext } from '../context/notesContext';
@@ -516,82 +515,6 @@ const PostForm = () => {
 				</button>
 			</div>
 		</div>
-
-		// <form>
-		// 	<div className="form-style-6">
-		// 		<h1>Upload Notes Form</h1>
-		// 		<label>Title</label>
-		// 		<input
-		// 			type="text"
-		// 			placeholder="Title"
-		// 			onChange={handleChange('title')}></input>
-		// 		<label>Description</label>
-		// 		<input
-		// 			type="text"
-		// 			placeholder="Description"
-		// 			onChange={handleChange('description')}></input>
-		// 		<label>PDF</label>
-		// 		<input
-		// 			type="file"
-		// 			placeholder="Choose notes"
-		// 			name="content"
-		// 			onChange={handleChange('content')}></input>
-		// 		<center>
-		// 			<label className="text-info" htmlFor="">
-		// 				After choosing file click the button below to proceed
-		// 			</label>
-		// 		</center>
-		// 		<button
-		// 			style={{ marginBottom: '10px' }}
-		// 			onClick={(event) => {
-		// 				event.preventDefault();
-		// 				handleSave();
-		// 			}}>
-		// 			upload notes
-		// 		</button>
-
-		// 		<Progress completed={percentage} color="green" />
-		// 		<label style={{ marginTop: '20px' }}>Branch</label>
-		// 		<select
-		// 			name="lavesh"
-		// 			onChange={handleChange('branch')}
-		// 			placeholder="branch">
-		// 			<option>Select</option>
-		// 			{branches.map((branch, index) => {
-		// 				return (
-		// 					<option key={index} value={branch}>
-		// 						{branch}
-		// 					</option>
-		// 				);
-		// 			})}
-		// 		</select>
-		// 		<label>Semester</label>
-		// 		<select onChange={handleChange('semester')} placeholder="semester">
-		// 			<option>Select</option>
-		// 			{semesters.map((sem, index) => {
-		// 				return (
-		// 					<option key={index} value={sem}>
-		// 						{sem}
-		// 					</option>
-		// 				);
-		// 			})}
-		// 		</select>
-		// 		<label>Subject</label>
-		// 		<select onChange={handleChange('subject')} placeholder="subject">
-		// 			<option>Select</option>
-		// 			{subjects.map((sub, index) => {
-		// 				return (
-		// 					<option key={index} value={sub}>
-		// 						{sub}
-		// 					</option>
-		// 				);
-		// 			})}
-		// 		</select>
-		// 		<button type="submit" onClick={handleSubmit}>
-		// 			Upload Notes
-		// 		</button>
-		// 	</div>
-		// </form>
 	);
 };
 

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import api from '../api/notes-api';
 import { API } from '../backend';
 import createDataContext from './createDataContext';
@@ -30,38 +29,8 @@ const createNotes = (dispatch) => {
 	}) => {
 		console.log('manish');
 
-		// console.log('check');
 		console.log(title, description, content, semester, branch, subject, userId);
 		const token = localStorage.getItem('token');
-
-		// fetch(`${API}/post/create/${userId}`, {
-		// 	method: 'POST',
-		// headers: {
-		// 	Accept: 'application/json',
-		// 	Authorization: `Bearer ${token}`,
-		// 	'Content-Type': 'application/json',
-		// },
-		// body: {
-		// 	title: title,
-		// 	description: description,
-		// semester: semester,
-		// 		subject: subject,
-		// 		branch: branch,
-		// 		content: content,
-		// 	},
-		// })
-		// 	.then((response) => {
-		// 		console.log('response', response);
-		// 		console.log('check');
-		// 	alert('Your post is uploaded successfully');
-		// 	// window.location.reload();
-		// 	return response.json();
-		// })
-		// .catch((err) => {
-		// 	console.log(err);
-		// 	console.log('check');
-		// });
-
 		await api
 			.post(`${API}/post/create/${userId}`, {
 				title,
